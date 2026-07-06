@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Sys - Dashboard</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/dashboard.css">
+</head>
+
+<body data-page="dashboard" data-title="Dashboard"
+  data-sub="Welcome back! Here's what's happening with your hotel today.">
+<div class="app">
+
+  <div id="sidebar-placeholder"></div>
+
+  <div class="main">
+
+    <div id="topbar-placeholder"></div>
+
+    <div class="page-content">
+
+      <!-- KPI Cards -->
+      <section class="kpi-row">
+
+        <div class="kpi-card kpi-blue">
+          <div class="kpi-label">Arrivals Today</div>
+          <div class="kpi-value-row">
+            <span class="kpi-value">18</span>
+            <div class="kpi-icon-wrap">
+              <i class="fa-solid fa-suitcase-rolling"></i>
+            </div>
+          </div>
+          <div class="kpi-change up">
+            <i class="fa-solid fa-arrow-up"></i> +12%
+            <span class="kpi-sub">from yesterday</span>
+          </div>
+        </div>
+
+        <div class="kpi-card kpi-red">
+          <div class="kpi-label">Departures Today</div>
+          <div class="kpi-value-row">
+            <span class="kpi-value">12</span>
+            <div class="kpi-icon-wrap">
+              <i class="fa-solid fa-right-from-bracket"></i>
+            </div>
+          </div>
+          <div class="kpi-change down">
+            <i class="fa-solid fa-arrow-down"></i> -5%
+            <span class="kpi-sub">from yesterday</span>
+          </div>
+        </div>
+
+        <div class="kpi-card kpi-green">
+          <div class="kpi-label">Rooms Occupied</div>
+          <div class="kpi-value-row">
+            <span class="kpi-value">45/46</span>
+            <div class="kpi-icon-wrap">
+              <i class="fa-solid fa-bed"></i>
+            </div>
+          </div>
+          <div class="kpi-change up">
+            <i class="fa-solid fa-arrow-up"></i>
+            <span class="kpi-sub">75% Occupancy</span>
+          </div>
+        </div>
+
+        <div class="kpi-card kpi-yellow">
+          <div class="kpi-label">Rooms to Clean</div>
+          <div class="kpi-value-row">
+            <span class="kpi-value">8</span>
+            <div class="kpi-icon-wrap">
+              <i class="fa-solid fa-broom"></i>
+            </div>
+          </div>
+          <div class="kpi-change">
+            <span class="kpi-sub" style="margin:0;">Pending</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Middle Row: Occupancy + Bookings -->
+      <div class="middle-row">
+
+        <!-- Occupancy Overview -->
+        <div class="card">
+          <div class="card-header">
+            <h2>Occupancy Overview</h2>
+            <select class="card-select">
+              <option>This Month</option>
+              <option>Last Month</option>
+              <option>This Year</option>
+            </select>
+          </div>
+          <div class="occupancy-chart-wrap">
+            <div class="donut-wrap">
+              <canvas id="occupancyChart"></canvas>
+            </div>
+            <div class="occupancy-legend">
+              <div class="legend-item">
+                <div class="legend-left">
+                  <div class="legend-dot" style="background:#1d4ed8;"></div>
+                  <span class="legend-label">Occupied</span>
+                </div>
+                <span class="legend-value">50 Rooms</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-left">
+                  <div class="legend-dot" style="background:#93c5fd;"></div>
+                  <span class="legend-label">Available</span>
+                </div>
+                <span class="legend-value">25 Rooms</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-left">
+                  <div class="legend-dot" style="background:#bfdbfe;"></div>
+                  <span class="legend-label">Out of Service</span>
+                </div>
+                <span class="legend-value">5 Rooms</span>
+              </div>
+              <div class="legend-item legend-total">
+                <div class="legend-left">
+                  <div class="legend-dot" style="background:transparent;"></div>
+                  <span class="legend-label">Total Rooms</span>
+                </div>
+                <span class="legend-value">80</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Bookings -->
+        <div class="card">
+          <div class="card-header">
+            <h2>Recent Bookings &amp; Activity</h2>
+          </div>
+          <table class="bookings-table">
+            <thead>
+              <tr>
+                <th>Guest Name</th>
+                <th>Room No.</th>
+                <th>Check-in</th>
+                <th>Check-out</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="bookingsBody">
+              <!-- injected by JS -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <!-- Bottom Row: Revenue + Housekeeping -->
+      <div class="bottom-row">
+
+        <!-- Revenue Overview -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2>Revenue Overview</h2>
+              <div>
+                <span class="revenue-amount">$18,750.00</span>
+                <span class="revenue-change">+15.6% from last month</span>
+              </div>
+            </div>
+            <select class="card-select">
+              <option>This Month</option>
+              <option>Last Month</option>
+              <option>This Year</option>
+            </select>
+          </div>
+          <div class="revenue-chart-wrap">
+            <canvas id="revenueChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Housekeeping Status -->
+        <div class="card">
+          <div class="hk-header">
+            <h2>Housekeeping Status</h2>
+            <a href="#" class="view-all-link">View All</a>
+          </div>
+          <div class="hk-list">
+            <div class="hk-item">
+              <div class="hk-icon red">
+                <i class="fa-solid fa-broom"></i>
+              </div>
+              <span class="hk-count">8</span>
+              <span class="hk-label">Rooms to Clean</span>
+            </div>
+            <div class="hk-item">
+              <div class="hk-icon yellow">
+                <i class="fa-solid fa-hourglass-half"></i>
+              </div>
+              <span class="hk-count">5</span>
+              <span class="hk-label">Rooms in Progress</span>
+            </div>
+            <div class="hk-item">
+              <div class="hk-icon green">
+                <i class="fa-solid fa-check"></i>
+              </div>
+              <span class="hk-count">12</span>
+              <span class="hk-label">Rooms Completed</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Quick Actions (outside page-content for full width) -->
+    <div class="quick-actions-section">
+      <h2>Quick Actions</h2>
+      <div class="qa-row">
+        <button class="qa-btn">
+          <div class="qa-icon qa-blue"><i class="fa-solid fa-plus"></i></div>
+          New Reservation
+        </button>
+        <button class="qa-btn">
+          <div class="qa-icon qa-green"><i class="fa-solid fa-person-walking-arrow-right"></i></div>
+          Walk-in Guest
+        </button>
+        <button class="qa-btn">
+          <div class="qa-icon qa-purple"><i class="fa-solid fa-bed"></i></div>
+          Add Room
+        </button>
+        <button class="qa-btn">
+          <div class="qa-icon qa-yellow"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+          Billing
+        </button>
+        <button class="qa-btn">
+          <div class="qa-icon qa-orange"><i class="fa-solid fa-chart-column"></i></div>
+          Reports
+        </button>
+        <button class="qa-btn">
+          <div class="qa-icon qa-navy"><i class="fa-solid fa-door-open"></i></div>
+          Room Status
+        </button>
+      </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="js/components.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>
