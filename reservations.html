@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Reservations | Hotel Management System</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+
+<!-- Shared component + dashboard styles (already in your project) -->
+<link rel="stylesheet" href="styles/components.css" />
+<link rel="stylesheet" href="styles/dashboard.css" />
+<!-- New styles just for this page -->
+<link rel="stylesheet" href="styles/reservations.css" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body data-page="reservations" data-title="Reservations" data-sub="Manage all your hotel reservations in one place.">
+
+  <div class="app">
+
+    <!-- Sidebar gets injected here by components.js -->
+    <div id="sidebar-placeholder"></div>
+
+    <div class="main">
+
+      <!-- Topbar gets injected here by components.js -->
+      <div id="topbar-placeholder"></div>
+
+      <main class="page-body">
+
+        <!-- Page header -->
+        <div class="page-header">
+          <div>
+            <!--<h1>Reservations</h1>-->
+            <!--<p class="page-subtitle">Manage all your hotel reservations in one place.</p>-->
+          </div>
+        </div>
+
+        <!-- Stat cards -->
+        <section class="stats-grid">
+
+          <div class="stat-card">
+            <div class="stat-icon icon-blue">📅</div>
+            <div class="stat-info">
+              <span class="stat-label">Today Reservations</span>
+              <span class="stat-value">128</span>
+              <span class="stat-trend up">+12% from last month</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon icon-orange">🧾</div>
+            <div class="stat-info">
+              <span class="stat-label">Confirmed</span>
+              <span class="stat-value">92</span>
+              <span class="stat-trend neutral">72% of total</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon icon-green">✅</div>
+            <div class="stat-info">
+              <span class="stat-label">Check-ins Today</span>
+              <span class="stat-value">18</span>
+              <span class="stat-trend up">↑ 8% from Yesterday</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon icon-purple">🚪</div>
+            <div class="stat-info">
+              <span class="stat-label">Check-outs Today</span>
+              <span class="stat-value">15</span>
+              <span class="stat-trend down">↓ 3% from Yesterday</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon icon-red">✖</div>
+            <div class="stat-info">
+              <span class="stat-label">Canceled</span>
+              <span class="stat-value">5</span>
+              <span class="stat-trend down">3% from Yesterday</span>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- Search + filters bar -->
+        <section class="table-toolbar">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Search by guest name, phone, email, or booking ID" />
+          </div>
+
+          <select id="statusFilter" class="status-filter">
+            <option value="all">All Status</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="arriving">Arriving</option>
+            <option value="departed">Departed</option>
+            <option value="checked-out">Checked Out</option>
+            <option value="cancelled">Cancelled</option>
+            <option value="pending">Pending</option>
+          </select>
+
+          <div class="date-range">
+            <span class="calendar-icon">📆</span>
+            <span id="dateRangeLabel">May 20, 2026 - May 26, 2026</span>
+          </div>
+
+          <button class="filters-btn">
+            <span>⚗</span> Filters
+          </button>
+        </section>
+
+        <!-- Table -->
+        <section class="table-card">
+          <h2 class="table-title">All Reservations</h2>
+
+          <div class="table-scroll">
+            <table class="reservations-table">
+              <thead>
+                <tr>
+                  <th>Booking ID</th>
+                  <th>Guest Name</th>
+                  <th>Room &amp; Type</th>
+                  <th>Check-In</th>
+                  <th>Check-Out</th>
+                  <th>Guests</th>
+                  <th>Total Amount</th>
+                  <th>Status</th>
+                  <th>Source</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="reservationsTableBody">
+                <!-- Rows are rendered by js/reservations.js -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-footer">
+            <span id="paginationSummary">Showing 1 to 7 reservations</span>
+            <div class="pagination">
+              <button class="page-nav" id="prevPage">&lt;</button>
+              <button class="page-number active">1</button>
+              <button class="page-nav" id="nextPage">&gt;</button>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- Footer gets injected here by components.js -->
+      <div id="footer-placeholder"></div>
+
+    </div>
+  </div>
+
+<script src="js/components.js"></script>
+<script src="js/reservations.js"></script>
+</body>
+</html>
