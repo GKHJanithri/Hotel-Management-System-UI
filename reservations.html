@@ -105,14 +105,135 @@
             <option value="pending">Pending</option>
           </select>
 
-          <div class="date-range">
-            <span class="calendar-icon">📆</span>
-            <span id="dateRangeLabel">May 20, 2026 - May 26, 2026</span>
+          <div class="date-range-wrap">
+            <button type="button" id="dateRangeButton" class="date-range">
+              <span class="calendar-icon">📆</span>
+              <span id="dateRangeLabel">Any date</span>
+              <span class="date-range-caret">▾</span>
+            </button>
+
+            <div id="dateRangePopover" class="date-range-popover" aria-hidden="true">
+              <label>
+                Start date
+                <input type="date" id="startDateInput" />
+              </label>
+              <label>
+                End date
+                <input type="date" id="endDateInput" />
+              </label>
+              <div class="date-range-actions">
+                <button type="button" id="clearDateRangeBtn" class="popover-btn secondary">Clear</button>
+                <button type="button" id="applyDateRangeBtn" class="popover-btn primary">Apply</button>
+              </div>
+            </div>
           </div>
 
-          <button class="filters-btn">
-            <span>⚗</span> Filters
-          </button>
+          <div class="filters-wrap">
+            <button type="button" class="filters-btn" id="filtersButton" aria-expanded="false" aria-controls="filtersPanel">
+              <span>⚗</span> Filters
+            </button>
+
+            <div id="filtersPanel" class="filters-panel" aria-hidden="true">
+              <div class="filters-panel-head">
+                <div>
+                  <h3>Filters</h3>
+                  <p>Refine reservations by details and sort order.</p>
+                </div>
+                <button type="button" class="panel-close-btn" id="closeFiltersPanelBtn">×</button>
+              </div>
+
+              <div class="filters-panel-body">
+                <label>
+                  Room Type
+                  <select id="roomTypeFilter">
+                    <option value="all">All Room Types</option>
+                    <option value="Standard Room">Standard Room</option>
+                    <option value="Deluxe Room">Deluxe Room</option>
+                    <option value="Suite Room">Suite Room</option>
+                  </select>
+                </label>
+
+                <label>
+                  Booking Source
+                  <select id="sourceFilter">
+                    <option value="all">All Sources</option>
+                    <option value="Website">Website</option>
+                    <option value="Walk-in">Walk-in</option>
+                    <option value="Booking.com">Booking.com</option>
+                    <option value="Agoda">Agoda</option>
+                    <option value="Expedia">Expedia</option>
+                    <option value="Direct">Direct</option>
+                  </select>
+                </label>
+
+                <label>
+                  Payment Status
+                  <select id="paymentStatusFilter">
+                    <option value="all">All Payment Statuses</option>
+                    <option value="paid">Paid</option>
+                    <option value="pending">Pending</option>
+                    <option value="partial">Partial</option>
+                  </select>
+                </label>
+
+                <label>
+                  Guest Type
+                  <select id="guestTypeFilter">
+                    <option value="all">All Guest Types</option>
+                    <option value="vip">VIP</option>
+                    <option value="regular">Regular</option>
+                  </select>
+                </label>
+
+                <label>
+                  Number of Guests
+                  <select id="guestCountFilter">
+                    <option value="all">Any Count</option>
+                    <option value="1">1 Guest</option>
+                    <option value="2">2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4plus">4+ Guests</option>
+                  </select>
+                </label>
+
+                <label>
+                  Room Number
+                  <input type="text" id="roomNumberFilter" placeholder="e.g. 204" />
+                </label>
+
+                <label class="check-option">
+                  <input type="checkbox" id="checkInTodayFilter" />
+                  <span>Check-in Today</span>
+                </label>
+
+                <label class="check-option">
+                  <input type="checkbox" id="checkOutTodayFilter" />
+                  <span>Check-out Today</span>
+                </label>
+
+                <label>
+                  Sort By
+                  <select id="sortByFilter">
+                    <option value="checkInAsc">Check-in Date: Earliest first</option>
+                    <option value="checkInDesc">Check-in Date: Latest first</option>
+                    <option value="checkOutAsc">Check-out Date: Earliest first</option>
+                    <option value="checkOutDesc">Check-out Date: Latest first</option>
+                    <option value="guestNameAsc">Guest Name: A to Z</option>
+                    <option value="guestNameDesc">Guest Name: Z to A</option>
+                    <option value="roomNumberAsc">Room Number: Low to High</option>
+                    <option value="roomNumberDesc">Room Number: High to Low</option>
+                    <option value="amountDesc">Total Amount: High to Low</option>
+                    <option value="amountAsc">Total Amount: Low to High</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="filters-panel-actions">
+                <button type="button" class="panel-btn secondary" id="resetAllFiltersBtn">Reset</button>
+                <button type="button" class="panel-btn primary" id="applyAdvancedFiltersBtn">Apply Filters</button>
+              </div>
+            </div>
+          </div>
         </section>
 
         <!-- Table -->
@@ -150,6 +271,29 @@
             </div>
           </div>
         </section>
+
+        <div id="reservationModal" class="reservation-modal" aria-hidden="true">
+          <div class="reservation-modal-backdrop" data-modal-close></div>
+          <div class="reservation-modal-card" role="dialog" aria-modal="true" aria-labelledby="reservationModalTitle">
+            <div class="reservation-modal-header">
+              <div>
+                <h3 id="reservationModalTitle">Reservation Details</h3>
+                <p id="reservationModalSubtitle">View or update reservation information.</p>
+              </div>
+              <button type="button" class="modal-close-btn" data-modal-close>×</button>
+            </div>
+
+            <div id="reservationModalBody" class="reservation-modal-body"></div>
+
+            <div id="reservationModalFooter" class="reservation-modal-footer"></div>
+          </div>
+        </div>
+
+        <div id="moreMenu" class="more-menu" aria-hidden="true">
+          <button type="button" data-more-action="confirm">Mark as Confirmed</button>
+          <button type="button" data-more-action="cancel">Cancel Reservation</button>
+          <button type="button" data-more-action="copy">Copy Booking ID</button>
+        </div>
 
       </main>
 

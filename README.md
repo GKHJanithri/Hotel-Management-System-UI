@@ -1,28 +1,47 @@
-# Hotel-Management-System-UI
 # Hotel Management System UI
 
 Frontend UI for the **Hotel Management System**, designed and developed for **EgoTECH World**.
 
 ## Project Overview
 
-This project focuses on building a modern, responsive, and user-friendly Hotel Management System interface. The application currently includes an Admin Dashboard with reusable UI components such as the sidebar, topbar, and footer. The UI was designed in Figma and developed using HTML, CSS, Bootstrap, and JavaScript.
+This project focuses on building a modern, responsive, and user-friendly Hotel Management System interface. The UI was first designed in **Figma** and then converted into frontend code using **HTML**, **CSS**, **Bootstrap 5**, and **JavaScript**.
+
+The project follows a reusable component architecture by separating the Sidebar, Topbar, and Footer into shared components for better maintainability and scalability.
 
 ---
 
 ## Pages
 
-### Admin Dashboard
+### Completed Pages
+
+- ✅ Dashboard
+- ✅ Reservations
+
+### Dashboard Features
 
 - Dashboard Overview
-- Reservation Statistics
+- Arrival & Departure Statistics
 - Room Occupancy Overview
-- Revenue Summary
+- Revenue Overview
+- Housekeeping Status
 - Quick Action Cards
-- Recent Reservations
-- Sidebar Navigation
-- Search Functionality
+- Recent Booking Activity
+- Search Bar
 - Notifications
-- User Profile Section
+- Admin Profile
+
+### Reservations Features
+
+- Reservation Summary Cards
+- Reservation Search
+- Filter by Status
+- Date Range Filter
+- Reservation Table
+- Reservation Status Badges
+- View Reservation
+- Edit Reservation
+- More Actions Menu
+- Pagination
 
 ---
 
@@ -41,21 +60,22 @@ This project focuses on building a modern, responsive, and user-friendly Hotel M
 
 ### Hotel Management Features
 
-- Dashboard Management
-- Reservation Overview
+- Dashboard Analytics
+- Reservation Management
+- Reservation Statistics
 - Occupancy Monitoring
-- Revenue Summary
-- Guest Statistics
+- Revenue Overview
 
 ### UI Features
 
 - Responsive Design
 - Modern Hotel Theme
-- Clean and User-Friendly Interface
+- Clean & User-Friendly Interface
 - Interactive Dashboard Components
-- Reusable Components Architecture
-- Shared Sidebar, Topbar, and Footer Components
+- Reusable Sidebar, Topbar & Footer
+- Shared CSS Architecture
 - Responsive Navigation Layout
+- Bootstrap Components
 
 ---
 
@@ -64,8 +84,6 @@ This project focuses on building a modern, responsive, and user-friendly Hotel M
 ```text
 hotel-management-system-ui/
 │
-├── .vscode/
-│
 ├── components/
 │   ├── footer.html
 │   ├── sidebar.html
@@ -73,13 +91,16 @@ hotel-management-system-ui/
 │
 ├── js/
 │   ├── components.js
-│   └── dashboard.js
+│   ├── dashboard.js
+│   └── reservations.js
 │
 ├── styles/
 │   ├── components.css
-│   └── dashboard.css
+│   ├── dashboard.css
+│   └── reservations.css
 │
 ├── dashboard.html
+├── reservations.html
 └── README.md
 ```
 
@@ -109,25 +130,29 @@ Website: https://egotechworld.com
 
 ## Current Progress
 
-- ✅ Dashboard UI Design Completed
+- ✅ Dashboard UI Designed in Figma
 - ✅ Dashboard Frontend Development Completed
-- ✅ Reusable Components (Sidebar, Topbar, Footer) Implemented
+- ✅ Reservations UI Designed in Figma
+- ✅ Reservations Frontend Development Completed
+- ✅ Reusable Sidebar Component
+- ✅ Reusable Topbar Component
+- ✅ Reusable Footer Component
+- ✅ Shared CSS and JavaScript Architecture Implemented
 
 ---
 
-## Future Enhancements
+## Upcoming Modules
 
-- Reservation Management
 - Room Management
-- Guest Management
+- Housekeeping
+- Point of Sale (POS)
+- Billing & Invoicing
 - Staff Management
-- Housekeeping Management
-- Billing & Payments
-- Reports & Analytics
-- Settings Module
+- Reports
+- Settings
+- Authentication
 - Backend Integration
 - Database Connectivity
-- Authentication & Authorization
 
 ---
 
