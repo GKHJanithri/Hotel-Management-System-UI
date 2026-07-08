@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Sys - Room Management</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/room-management.css">
+</head>
+
+<body data-page="rooms" data-title="Room Management"
+  data-sub="Manage rooms, availability, rates and status in one place.">
+<div class="app">
+
+  <div id="sidebar-placeholder"></div>
+
+  <div class="main">
+
+    <div id="topbar-placeholder"></div>
+
+    <div class="page-content">
+
+      <!-- KPI Cards -->
+      <section class="kpi-row">
+
+        <div class="kpi-card kpi-blue">
+          <div class="kpi-info">
+            <p class="kpi-label">TOTAL ROOMS</p>
+            <h3 class="kpi-value" id="kpiTotal">80</h3>
+            <span class="kpi-sub">All Rooms</span>
+          </div>
+          <div class="kpi-icon-wrap">
+            <i class="fa-solid fa-building"></i>
+          </div>
+        </div>
+
+        <div class="kpi-card kpi-yellow">
+          <div class="kpi-info">
+            <p class="kpi-label">AVAILABLE</p>
+            <h3 class="kpi-value" id="kpiAvailable">25</h3>
+            <span class="kpi-sub" id="kpiAvailablePct">31.25%</span>
+          </div>
+          <div class="kpi-icon-wrap">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+        </div>
+
+        <div class="kpi-card kpi-green">
+          <div class="kpi-info">
+            <p class="kpi-label">OCCUPIED</p>
+            <h3 class="kpi-value" id="kpiOccupied">50</h3>
+            <span class="kpi-sub" id="kpiOccupiedPct">62.50%</span>
+          </div>
+          <div class="kpi-icon-wrap">
+            <i class="fa-solid fa-bed"></i>
+          </div>
+        </div>
+
+        <div class="kpi-card kpi-purple">
+          <div class="kpi-info">
+            <p class="kpi-label">OUT OF SERVICE</p>
+            <h3 class="kpi-value" id="kpiOutService">5</h3>
+            <span class="kpi-sub" id="kpiOutServicePct">6.25%</span>
+          </div>
+          <div class="kpi-icon-wrap">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </div>
+        </div>
+
+        <div class="kpi-card kpi-red">
+          <div class="kpi-info">
+            <p class="kpi-label">DIRTY ROOMS</p>
+            <h3 class="kpi-value" id="kpiDirty">8</h3>
+            <span class="kpi-sub dirty-sub">Needs Cleaning</span>
+          </div>
+          <div class="kpi-icon-wrap">
+            <i class="fa-solid fa-broom"></i>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Filters & Tabs -->
+      <div class="card rooms-card">
+
+        <!-- Filters Row -->
+        <div class="filters-row">
+          <div class="search-box-room">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput"
+              placeholder="Search by Room Number">
+          </div>
+
+          <select class="filter-select" id="typeFilter">
+            <option value="">All Types</option>
+            <option value="Single Room">Single Room</option>
+            <option value="Double Room">Double Room</option>
+            <option value="Deluxe Room">Deluxe Room</option>
+            <option value="Suite">Suite</option>
+          </select>
+
+          <select class="filter-select" id="statusFilter">
+            <option value="">All Status</option>
+            <option value="Available">Available</option>
+            <option value="Occupied">Occupied</option>
+            <option value="Cleaning">Cleaning</option>
+            <option value="Maintenance">Maintenance</option>
+            <option value="Out of Service">Out of Service</option>
+          </select>
+
+          <select class="filter-select" id="floorFilter">
+            <option value="">All Floors</option>
+            <option value="1">Floor 1</option>
+            <option value="2">Floor 2</option>
+            <option value="3">Floor 3</option>
+          </select>
+
+          <button class="btn-add-room" id="addRoomBtn">
+            <i class="fa-solid fa-plus"></i> Add Room
+          </button>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs-row">
+          <button class="tab-btn active" data-tab="list">Room List</button>
+          <button class="tab-btn" data-tab="map">Room Map</button>
+        </div>
+
+        <!-- Room List Grid -->
+        <div id="tabList">
+          <div class="rooms-grid" id="roomsGrid">
+            <!-- room cards injected by JS -->
+          </div>
+          <div class="pagination-row">
+            <span class="results-text" id="resultsText">
+              Showing 1 to 12 results
+            </span>
+            <div class="pagination">
+              <button class="page-btn" id="prevPage">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <button class="page-btn active">1</button>
+              <button class="page-btn" id="nextPage">
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Room Map View -->
+        <div id="tabMap" style="display:none;">
+          <div class="map-grid" id="mapGrid">
+            <!-- map tiles injected by JS -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+  </div>
+</div>
+
+<!-- Add / Edit Room Modal -->
+<div class="modal-overlay" id="roomModal">
+  <div class="modal-box">
+
+    <div class="modal-header">
+      <h3 id="modalTitle">Add New Room</h3>
+      <button class="modal-close" id="closeModalBtn">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <form id="roomForm" class="modal-form">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="roomNumber">Room Number *</label>
+          <input type="text" id="roomNumber"
+            placeholder="e.g. 101" required>
+        </div>
+        <div class="form-group">
+          <label for="roomType">Room Type *</label>
+          <select id="roomType" required>
+            <option value="">Select type</option>
+            <option value="Single Room">Single Room</option>
+            <option value="Double Room">Double Room</option>
+            <option value="Deluxe Room">Deluxe Room</option>
+            <option value="Suite">Suite</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="roomFloor">Floor *</label>
+          <select id="roomFloor" required>
+            <option value="">Select floor</option>
+            <option value="1">Floor 1</option>
+            <option value="2">Floor 2</option>
+            <option value="3">Floor 3</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="roomStatus">Status *</label>
+          <select id="roomStatus" required>
+            <option value="">Select status</option>
+            <option value="Available">Available</option>
+            <option value="Occupied">Occupied</option>
+            <option value="Cleaning">Cleaning</option>
+            <option value="Maintenance">Maintenance</option>
+            <option value="Out of Service">Out of Service</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="roomBeds">Beds *</label>
+          <input type="number" id="roomBeds"
+            min="1" max="10" placeholder="e.g. 1" required>
+        </div>
+        <div class="form-group">
+          <label for="roomGuests">Max Guests *</label>
+          <input type="number" id="roomGuests"
+            min="1" max="20" placeholder="e.g. 2" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="roomPrice">Price per Night (Rs.) *</label>
+        <input type="number" id="roomPrice"
+          min="0" step="0.01" placeholder="e.g. 24000" required>
+      </div>
+
+      <div class="form-group">
+        <label for="roomNotes">Notes (optional)</label>
+        <textarea id="roomNotes" rows="2"
+          placeholder="Any additional notes..."></textarea>
+      </div>
+
+      <input type="hidden" id="editRoomIndex" value="">
+
+      <div class="modal-actions">
+        <button type="button" class="btn-outline"
+          id="cancelModalBtn">Cancel</button>
+        <button type="submit" class="btn-primary">
+          <i class="fa-solid fa-check"></i> Save Room
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<!-- View Room Modal -->
+<div class="modal-overlay" id="viewModal">
+  <div class="modal-box">
+
+    <div class="modal-header">
+      <h3 id="viewModalTitle">Room Details</h3>
+      <button class="modal-close" id="closeViewBtn">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="view-body" id="viewBody"></div>
+
+    <div class="modal-footer-actions">
+      <button class="btn-outline" id="closeViewBtn2">Close</button>
+      <button class="btn-primary" id="editFromViewBtn">
+        <i class="fa-solid fa-pen"></i> Edit Room
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Update Status Modal -->
+<div class="modal-overlay" id="statusModal">
+  <div class="modal-box" style="max-width:400px;">
+
+    <div class="modal-header">
+      <h3>Update Room Status</h3>
+      <button class="modal-close" id="closeStatusBtn">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="modal-form">
+      <p class="status-room-label" id="statusRoomLabel">Room 101</p>
+      <div class="form-group">
+        <label for="newStatus">New Status *</label>
+        <select id="newStatus">
+          <option value="Available">Available</option>
+          <option value="Occupied">Occupied</option>
+          <option value="Cleaning">Cleaning</option>
+          <option value="Maintenance">Maintenance</option>
+          <option value="Out of Service">Out of Service</option>
+        </select>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-outline" id="cancelStatusBtn">Cancel</button>
+        <button class="btn-primary" id="confirmStatusBtn">
+          <i class="fa-solid fa-check"></i> Update
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/components.js"></script>
+<script src="js/room-management.js"></script>
+</body>
+</html>
