@@ -20,7 +20,6 @@ const rooms = [
 
 // ── DOM ──
 const roomsGrid   = document.getElementById('roomsGrid');
-const mapGrid     = document.getElementById('mapGrid');
 const searchInput = document.getElementById('searchInput');
 const typeFilter  = document.getElementById('typeFilter');
 const statusFilter= document.getElementById('statusFilter');
@@ -37,18 +36,6 @@ function getStatusClass(status) {
     'Out of Service':'out-service'
   };
   return map[status] || 'available';
-}
-
-// ── Map tile icon ──
-function getStatusIcon(status) {
-  const map = {
-    'Available':      'fa-solid fa-check',
-    'Occupied':       'fa-solid fa-bed',
-    'Cleaning':       'fa-solid fa-broom',
-    'Maintenance':    'fa-solid fa-wrench',
-    'Out of Service': 'fa-solid fa-ban'
-  };
-  return map[status] || 'fa-solid fa-check';
 }
 
 // ── Format price ──
@@ -128,49 +115,6 @@ function renderRooms(data) {
   updateKPIs();
 }
 
-// ── Render Room Map ──
-function renderMap(data) {
-  mapGrid.innerHTML = '';
-
-  data.forEach(room => {
-    const realIndex = rooms.indexOf(room);
-    const statusCls = getStatusClass(room.status);
-    const icon      = getStatusIcon(room.status);
-
-    const tile = document.createElement('div');
-    tile.className = `map-tile ${statusCls}`;
-    tile.title = `Room ${room.number} - ${room.status}`;
-    tile.innerHTML = `
-      <i class="${icon}"></i>
-      <span>${room.number}</span>
-    `;
-    tile.addEventListener('click', () => openViewModal(realIndex));
-    mapGrid.appendChild(tile);
-  });
-
-  // Legend
-  const legend = document.createElement('div');
-  legend.className = 'map-legend';
-  legend.innerHTML = `
-    <div class="legend-item">
-      <div class="legend-dot" style="background:#6ee7b7;"></div>Available
-    </div>
-    <div class="legend-item">
-      <div class="legend-dot" style="background:#fca5a5;"></div>Occupied
-    </div>
-    <div class="legend-item">
-      <div class="legend-dot" style="background:#fde047;"></div>Cleaning
-    </div>
-    <div class="legend-item">
-      <div class="legend-dot" style="background:#c4b5fd;"></div>Maintenance
-    </div>
-    <div class="legend-item">
-      <div class="legend-dot" style="background:#d1d5db;"></div>Out of Service
-    </div>
-  `;
-  mapGrid.appendChild(legend);
-}
-
 // ── Attach card action listeners ──
 function attachCardListeners() {
   document.querySelectorAll('.view-btn').forEach(btn => {
@@ -198,7 +142,6 @@ function applyFilters() {
   });
 
   renderRooms(filtered);
-  renderMap(filtered);
 }
 
 searchInput.addEventListener('input',   applyFilters);
@@ -211,12 +154,15 @@ floorFilter.addEventListener('change',  applyFilters);
 ════════════════════════════ */
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
+    if (btn.id === 'roomMapBtn') {
+      window.location.href = 'roomMap.html';
+      return;
+    }
+
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    const tab = btn.dataset.tab;
-    document.getElementById('tabList').style.display = tab === 'list' ? '' : 'none';
-    document.getElementById('tabMap').style.display  = tab === 'map'  ? '' : 'none';
+    document.getElementById('tabList').style.display = '';
   });
 });
 

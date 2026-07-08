@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Room Map | Hotel Management System</title>
+
+<!-- Shared component + dashboard styles (already in your project) -->
+<link rel="stylesheet" href="styles/components.css" />
+<link rel="stylesheet" href="styles/room-management.css" />
+<!-- New styles just for this page -->
+<link rel="stylesheet" href="styles/roomMap.css" />
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body data-page="rooms" data-title="Room Management" data-sub="Manage rooms, availability, rates and status in one place.">
+
+  <div class="app">
+
+    <!-- Sidebar gets injected here by components.js -->
+    <div id="sidebar-placeholder"></div>
+
+    <div class="main">
+
+      <!-- Topbar gets injected here by components.js -->
+      <div id="topbar-placeholder"></div>
+
+      <div class="page-content">
+
+        <!-- Page header -->
+        <div class="page-header">
+          <div>
+           <!--<h1>Room Map</h1>
+            <p class="page-subtitle">View room status by floor and filter the map.</p>-->
+          </div>
+        </div>
+
+        <!-- KPI Cards -->
+        <section class="kpi-row">
+
+          <div class="kpi-card kpi-blue">
+            <div class="kpi-info">
+              <p class="kpi-label">TOTAL ROOMS</p>
+              <h3 class="kpi-value" id="kpiTotal">80</h3>
+              <span class="kpi-sub">All Rooms</span>
+            </div>
+            <div class="kpi-icon-wrap">
+              <i class="fa-solid fa-building"></i>
+            </div>
+          </div>
+
+          <div class="kpi-card kpi-yellow">
+            <div class="kpi-info">
+              <p class="kpi-label">AVAILABLE</p>
+              <h3 class="kpi-value" id="kpiAvailable">30</h3>
+              <span class="kpi-sub" id="kpiAvailablePct">37.5%</span>
+            </div>
+            <div class="kpi-icon-wrap">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+          </div>
+
+          <div class="kpi-card kpi-green">
+            <div class="kpi-info">
+              <p class="kpi-label">OCCUPIED</p>
+              <h3 class="kpi-value" id="kpiOccupied">50</h3>
+              <span class="kpi-sub" id="kpiOccupiedPct">62.5%</span>
+            </div>
+            <div class="kpi-icon-wrap">
+              <i class="fa-solid fa-bed"></i>
+            </div>
+          </div>
+
+          <div class="kpi-card kpi-purple">
+            <div class="kpi-info">
+              <p class="kpi-label">OUT OF SERVICE</p>
+              <h3 class="kpi-value" id="kpiOutService">5</h3>
+              <span class="kpi-sub" id="kpiOutServicePct">6.25%</span>
+            </div>
+            <div class="kpi-icon-wrap">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </div>
+          </div>
+
+          <div class="kpi-card kpi-red">
+            <div class="kpi-info">
+              <p class="kpi-label">DIRTY ROOMS</p>
+              <h3 class="kpi-value" id="kpiDirty">8</h3>
+              <span class="kpi-sub dirty-sub">Needs Cleaning</span>
+            </div>
+            <div class="kpi-icon-wrap">
+              <i class="fa-solid fa-broom"></i>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- Room Map view -->
+        <div class="card rooms-card" id="roomMapView">
+          <div class="tabs-row">
+            <button class="tab-btn" id="roomListBtn" type="button">Room List</button>
+            <button class="tab-btn active" id="roomMapBtn" type="button">Room Map</button>
+          </div>
+
+          <div class="map-toolbar">
+            <h2 class="table-title">Room Map</h2>
+
+            <div class="map-filters">
+              <select id="statusFilter" class="status-filter">
+                <option value="all">All Status</option>
+                <option value="available">Available</option>
+                <option value="occupied">Occupied</option>
+                <option value="out-of-service">Out of Service</option>
+                <option value="dirty">Dirty Rooms</option>
+              </select>
+
+              <select id="floorFilter" class="status-filter">
+                <option value="all">All Floors</option>
+                <option value="1">1st Floor</option>
+                <option value="2">2nd Floor</option>
+                <option value="3">3rd Floor</option>
+              </select>
+
+              <div class="legend">
+                <span class="legend-item"><i class="dot dot-available"></i> Available</span>
+                <span class="legend-item"><i class="dot dot-occupied"></i> Occupied</span>
+                <span class="legend-item"><i class="dot dot-outofservice"></i> Out of Service</span>
+                <span class="legend-item"><i class="dot dot-dirty"></i> Dirty Rooms</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="floorsContainer"><!-- Rendered by js/room-management.js --></div>
+        </div>
+
+      </div>
+
+      <!-- Footer gets injected here by components.js -->
+      <div id="footer-placeholder"></div>
+
+    </div>
+  </div>
+
+<script src="js/components.js"></script>
+<script src="js/roomMap.js"></script>
+</body>
+</html>

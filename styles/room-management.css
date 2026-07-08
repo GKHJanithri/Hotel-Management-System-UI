@@ -212,6 +212,11 @@
   border-bottom-color: #2563eb;
 }
 
+.tab-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
 /* ════════════════════════════
    ROOM CARDS GRID
 ════════════════════════════ */
@@ -348,67 +353,6 @@
 }
 
 .btn-update-status:hover { background: #1d4ed8; }
-
-/* ════════════════════════════
-   ROOM MAP VIEW
-════════════════════════════ */
-.map-grid {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 10px;
-}
-
-.map-tile {
-  aspect-ratio: 1;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition: transform .15s, box-shadow .15s;
-}
-
-.map-tile:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-}
-
-.map-tile i { font-size: 18px; }
-
-.map-tile.available   { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
-.map-tile.occupied    { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
-.map-tile.cleaning    { background: #fef9c3; color: #854d0e; border-color: #fde047; }
-.map-tile.maintenance { background: #ede9fe; color: #5b21b6; border-color: #c4b5fd; }
-.map-tile.out-service { background: #f3f4f6; color: #374151; border-color: #d1d5db; }
-
-/* Map legend */
-.map-legend {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  color: var(--text-mid);
-}
-
-.legend-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 3px;
-}
 
 /* ── Pagination ── */
 .pagination-row {
