@@ -38,7 +38,7 @@ const FALLBACK_COMPONENTS = {
       <i class="fa-solid fa-file-invoice-dollar"></i>
       <span>Billing & Invoicing</span>
     </a>
-    <a href="staff.html" class="nav-item" data-page="staff">
+    <a href="staff_manage.html" class="nav-item" data-page="staff">
       <i class="fa-solid fa-users"></i>
       <span>Staff Management</span>
     </a>
