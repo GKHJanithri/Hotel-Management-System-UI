@@ -10,6 +10,8 @@ This project focuses on building a modern, responsive, and user-friendly Hotel M
 
 The project follows a reusable component architecture by separating the **Sidebar**, **Topbar**, and **Footer** into shared components for better maintainability, scalability, and code reusability.
 
+The system currently includes **Dashboard**, **Reservations**, **Room Management**, **Room Map**, **Housekeeping**, and **Point of Sale (POS)** modules.
+
 ---
 
 # Pages
@@ -20,6 +22,8 @@ The project follows a reusable component architecture by separating the **Sideba
 - ✅ Reservations
 - ✅ Room Management
 - ✅ Room Map
+- ✅ Housekeeping
+- ✅ Point of Sale (POS)
 
 ---
 
@@ -81,6 +85,34 @@ The project follows a reusable component architecture by separating the **Sideba
 
 ---
 
+## Housekeeping Features
+
+- Housekeeping Status Overview
+- Room Cleaning Schedule
+- Staff Assignment
+- Room Status Tracking
+- Maintenance Alerts
+- Search and Filter Rooms
+- Cleaning Progress
+- Task Summary
+
+---
+
+## Point of Sale (POS) Features
+
+- Food & Beverage Menu
+- Item Categories
+- Menu Search
+- Order Cart
+- Quantity Management
+- Billing Summary
+- Tax & Discount Calculation
+- Payment Methods
+- Order Confirmation
+- Invoice Preview
+
+---
+
 # Technologies Used
 
 - Figma (UI/UX Design)
@@ -101,6 +133,8 @@ The project follows a reusable component architecture by separating the **Sideba
 - Room Management
 - Room Availability Monitoring
 - Room Map Visualization
+- Housekeeping Management
+- Point of Sale (POS)
 - Occupancy Monitoring
 - Revenue Overview
 
@@ -121,6 +155,7 @@ The project follows a reusable component architecture by separating the **Sideba
 
 # Project Structure
 
+```text
 hotel-management-system-ui/
 │
 ├── components/
@@ -128,9 +163,25 @@ hotel-management-system-ui/
 │   ├── sidebar.html
 │   └── topbar.html
 │
+├── image/
+│   ├── cake.jpg
+│   ├── coc.jpg
+│   ├── coffee.jpg
+│   ├── french_frice.jpg
+│   ├── fruit_juice.jpg
+│   ├── hop.jpg
+│   ├── pasta.jpg
+│   ├── r_vine.jpg
+│   ├── rice.jpg
+│   ├── sandwich.jpg
+│   ├── towel.jpg
+│   └── w_vine.jpg
+│
 ├── js/
 │   ├── components.js
 │   ├── dashboard.js
+│   ├── housekeeping.js
+│   ├── POS.js
 │   ├── reservations.js
 │   ├── room-management.js
 │   └── roomMap.js
@@ -138,16 +189,20 @@ hotel-management-system-ui/
 ├── styles/
 │   ├── components.css
 │   ├── dashboard.css
+│   ├── housekeeping.css
+│   ├── POS.css
 │   ├── reservations.css
 │   ├── room-management.css
 │   └── roomMap.css
 │
 ├── dashboard.html
+├── housekeeping.html
+├── POS.html
 ├── reservations.html
 ├── room-management.html
 ├── roomMap.html
 └── README.md
-
+```
 
 ---
 
@@ -163,7 +218,7 @@ Website: https://egotechworld.com
 
 # Developed For
 
-**EgoTECH World**
+**EGOTECH WORLD**
 
 ---
 
@@ -183,6 +238,10 @@ Website: https://egotechworld.com
 - ✅ Room Management Frontend Development Completed
 - ✅ Room Map UI Designed in Figma
 - ✅ Room Map Frontend Development Completed
+- ✅ Housekeeping UI Designed in Figma
+- ✅ Housekeeping Frontend Development Completed
+- ✅ Point of Sale (POS) UI Designed in Figma
+- ✅ Point of Sale (POS) Frontend Development Completed
 - ✅ Reusable Sidebar Component
 - ✅ Reusable Topbar Component
 - ✅ Reusable Footer Component
@@ -194,11 +253,10 @@ Website: https://egotechworld.com
 
 # Upcoming Modules
 
-- Housekeeping
-- Point of Sale (POS)
 - Billing & Invoicing
+- Guest Management
 - Staff Management
-- Reports
+- Reports & Analytics
 - Settings
 - Authentication
 - Backend Integration
