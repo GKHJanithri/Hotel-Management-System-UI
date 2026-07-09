@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Point of Sale | Hotel Management System</title>
+
+<!-- Shared component + dashboard styles (already in your project) -->
+<link rel="stylesheet" href="styles/components.css" />
+<link rel="stylesheet" href="styles/dashboard.css" />
+<!-- New styles just for this page -->
+<link rel="stylesheet" href="styles/POS.css" />
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body data-page="pos" data-title="Point of Sale" data-sub="Manage restaurant orders, billing and room charges in one place.">
+
+  <div class="app">
+
+    <!-- Sidebar gets injected here by components.js -->
+    <div id="sidebar-placeholder"></div>
+
+    <div class="main">
+
+      <!-- Topbar gets injected here by components.js -->
+      <div id="topbar-placeholder"></div>
+
+      <main class="page-body">
+
+        <!-- Page header -->
+        <div class="page-header">
+          <div>
+           <!-- <h1>Point of Sale</h1>
+            <p class="page-subtitle">Manage restaurant orders, billing and room charges in one place.</p>-->
+          </div>
+        </div>
+
+        <!-- Stat cards -->
+        <section class="stats-grid">
+          <div class="stat-card stat-blue">
+            <span class="stat-label">Today's Sales</span>
+            <span class="stat-value" id="statSales">RS. 84,600.00</span>
+            <span class="stat-trend up">+12% from yesterday</span>
+          </div>
+
+          <div class="stat-card stat-green">
+            <span class="stat-label">Orders Today</span>
+            <span class="stat-value" id="statOrders">46</span>
+            <span class="stat-trend neutral">19 in progress</span>
+          </div>
+
+          <div class="stat-card stat-orange">
+            <span class="stat-label">Rooms Charges</span>
+            <span class="stat-value" id="statRoomCharges">Ra 31,200.00</span>
+            <span class="stat-trend neutral">To be billed at checkout</span>
+          </div>
+
+          <div class="stat-card stat-purple">
+            <span class="stat-label">Avg. Order Value</span>
+            <span class="stat-value" id="statAvgOrder">Ra 1,839.00</span>
+            <span class="stat-trend up">+4% from last week</span>
+          </div>
+        </section>
+
+        <!-- Main POS layout -->
+        <div class="pos-layout">
+
+          <!-- Menu items panel -->
+          <section class="menu-panel">
+            <div class="menu-panel-header">
+              <h2 class="table-title">Menu Items</h2>
+              <a href="#" class="manage-items-link">Manage Items</a>
+            </div>
+
+            <div class="category-tabs" id="categoryTabs">
+              <button class="category-tab active" data-category="all">All Items</button>
+              <button class="category-tab" data-category="breakfast">Breakfast</button>
+              <button class="category-tab" data-category="beverages">Beverages</button>
+              <button class="category-tab" data-category="restaurant">Restaurant</button>
+              <button class="category-tab" data-category="bar">Bar</button>
+              <button class="category-tab" data-category="spa">Spa &amp; Wellness</button>
+            </div>
+
+            <div class="menu-grid" id="menuGrid"><!-- Rendered by js/pos.js --></div>
+          </section>
+
+          <!-- Current order panel -->
+          <section class="order-panel">
+            <div class="order-panel-header">
+              <div>
+                <h2 class="table-title">Current Order</h2>
+                <p class="billing-to">Billing To: <strong id="billingRoom">Room 204 &middot; Amal De Silva</strong></p>
+              </div>
+              <button class="clear-btn" id="clearOrderBtn">Clear</button>
+            </div>
+
+            <div class="order-items-header">
+              <span>Item</span>
+              <span>Qty</span>
+              <span>Price</span>
+              <span>Total</span>
+            </div>
+
+            <div class="order-items" id="orderItems"><!-- Rendered by js/pos.js --></div>
+
+            <div class="order-note">
+              <input type="text" id="orderNote" placeholder="Add a note to the Order" />
+              <span class="note-icon">📝</span>
+            </div>
+
+            <div class="order-summary">
+              <div class="summary-row">
+                <span id="subtotalLabel">Sub Total (0 items)</span>
+                <span id="subtotalValue">Rs 0.00</span>
+              </div>
+              <div class="summary-row">
+                <span>Service Charge (10%)</span>
+                <span id="serviceChargeValue">Rs 0.00</span>
+              </div>
+              <div class="summary-row">
+                <span>Tax (3%)</span>
+                <span id="taxValue">Rs 0.00</span>
+              </div>
+              <div class="summary-row grand-total">
+                <span>Grand Total</span>
+                <span id="grandTotalValue">Rs 0.00</span>
+              </div>
+            </div>
+
+            <div class="payment-buttons">
+              <button class="payment-btn active" data-method="cash">💵 Cash</button>
+              <button class="payment-btn" data-method="card">💳 Card</button>
+              <button class="payment-btn" data-method="other">➕ Other</button>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- Recent transactions -->
+        <section class="table-card transactions-card">
+          <h2 class="table-title">Recent Transactions</h2>
+          <div class="table-scroll">
+            <table class="transactions-table">
+              <thead>
+                <tr>
+                  <th>Order Id</th>
+                  <th>Guest Room</th>
+                  <th>Items</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="transactionsTableBody"><!-- Rendered by js/pos.js --></tbody>
+            </table>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- Footer gets injected here by components.js -->
+      <div id="footer-placeholder"></div>
+
+    </div>
+  </div>
+
+<script src="js/components.js"></script>
+<script src="js/POS.js"></script>
+</body>
+</html>
