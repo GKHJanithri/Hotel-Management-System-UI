@@ -1,23 +1,29 @@
 # Hotel Management System UI
 
-Frontend UI for the **Hotel Management System**, designed and developed for **EgoTECH World**.
+Frontend UI for the **Hotel Management System**, designed and developed for **EGOTECH WORLD**.
+
+---
 
 ## Project Overview
 
 This project focuses on building a modern, responsive, and user-friendly Hotel Management System interface. The UI was first designed in **Figma** and then converted into frontend code using **HTML**, **CSS**, **Bootstrap 5**, and **JavaScript**.
 
-The project follows a reusable component architecture by separating the Sidebar, Topbar, and Footer into shared components for better maintainability and scalability.
+The project follows a reusable component architecture by separating the **Sidebar**, **Topbar**, and **Footer** into shared components for better maintainability, scalability, and code reusability.
 
 ---
 
-## Pages
+# Pages
 
-### Completed Pages
+## Completed Pages
 
 - ✅ Dashboard
 - ✅ Reservations
+- ✅ Room Management
+- ✅ Room Map
 
-### Dashboard Features
+---
+
+## Dashboard Features
 
 - Dashboard Overview
 - Arrival & Departure Statistics
@@ -30,7 +36,9 @@ The project follows a reusable component architecture by separating the Sidebar,
 - Notifications
 - Admin Profile
 
-### Reservations Features
+---
+
+## Reservations Features
 
 - Reservation Summary Cards
 - Reservation Search
@@ -45,7 +53,35 @@ The project follows a reusable component architecture by separating the Sidebar,
 
 ---
 
-## Technologies Used
+## Room Management Features
+
+- Room Statistics Cards
+- Search Rooms
+- Filter by Room Type
+- Filter by Room Status
+- Add New Room
+- Room List Table
+- Room Availability Status
+- View Room Details
+- Edit Room
+- Delete Room
+- Pagination
+
+---
+
+## Room Map Features
+
+- Interactive Room Grid Layout
+- Floor Selection
+- Room Availability Indicators
+- Occupied & Available Status
+- Room Type Identification
+- Room Information Panel
+- Quick Room Actions
+
+---
+
+# Technologies Used
 
 - Figma (UI/UX Design)
 - HTML5
@@ -56,13 +92,15 @@ The project follows a reusable component architecture by separating the Sidebar,
 
 ---
 
-## Features
+# Features
 
-### Hotel Management Features
+## Hotel Management Features
 
 - Dashboard Analytics
 - Reservation Management
-- Reservation Statistics
+- Room Management
+- Room Availability Monitoring
+- Room Map Visualization
 - Occupancy Monitoring
 - Revenue Overview
 
@@ -71,17 +109,18 @@ The project follows a reusable component architecture by separating the Sidebar,
 - Responsive Design
 - Modern Hotel Theme
 - Clean & User-Friendly Interface
-- Interactive Dashboard Components
-- Reusable Sidebar, Topbar & Footer
+- Reusable Sidebar
+- Reusable Topbar
+- Reusable Footer
 - Shared CSS Architecture
 - Responsive Navigation Layout
 - Bootstrap Components
+- Consistent Color Palette
 
 ---
 
-## Project Structure
+# Project Structure
 
-```text
 hotel-management-system-ui/
 │
 ├── components/
@@ -92,23 +131,29 @@ hotel-management-system-ui/
 ├── js/
 │   ├── components.js
 │   ├── dashboard.js
-│   └── reservations.js
+│   ├── reservations.js
+│   ├── room-management.js
+│   └── roomMap.js
 │
 ├── styles/
 │   ├── components.css
 │   ├── dashboard.css
-│   └── reservations.css
+│   ├── reservations.css
+│   ├── room-management.css
+│   └── roomMap.css
 │
 ├── dashboard.html
 ├── reservations.html
+├── room-management.html
+├── roomMap.html
 └── README.md
-```
+
 
 ---
 
-## Company
+# Company
 
-**EgoTECH World**
+**EGOTECH WORLD**
 
 Developing ready-made and custom solutions for modern challenges.
 
@@ -116,34 +161,39 @@ Website: https://egotechworld.com
 
 ---
 
-## Developed For
+# Developed For
 
 **EgoTECH World**
 
 ---
 
-## Developed By
+# Developed By
 
-**EgoTECH World Intern Team**
+**EGOTECH WORLD Intern Team**
 
 ---
 
-## Current Progress
+# Current Progress
 
 - ✅ Dashboard UI Designed in Figma
 - ✅ Dashboard Frontend Development Completed
 - ✅ Reservations UI Designed in Figma
 - ✅ Reservations Frontend Development Completed
+- ✅ Room Management UI Designed in Figma
+- ✅ Room Management Frontend Development Completed
+- ✅ Room Map UI Designed in Figma
+- ✅ Room Map Frontend Development Completed
 - ✅ Reusable Sidebar Component
 - ✅ Reusable Topbar Component
 - ✅ Reusable Footer Component
-- ✅ Shared CSS and JavaScript Architecture Implemented
+- ✅ Shared CSS Architecture
+- ✅ Shared JavaScript Component Loader
+- ✅ Responsive Layout Implemented
 
 ---
 
-## Upcoming Modules
+# Upcoming Modules
 
-- Room Management
 - Housekeeping
 - Point of Sale (POS)
 - Billing & Invoicing
@@ -156,4 +206,4 @@ Website: https://egotechworld.com
 
 ---
 
-© 2026 EGOTECHWORLD PVT LTD. All Rights Reserved.
+© 2026 EGOTECHWORLD PVT LTD | IT Solutions. All Rights Reserved.
