@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Sys - Housekeeping</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/housekeeping.css">
+</head>
+
+<body data-page="housekeeping" data-title="Housekeeping"
+  data-sub="Manage room cleaning tasks, schedules, staff and room status in one place.">
+<div class="app">
+
+  <div id="sidebar-placeholder"></div>
+
+  <div class="main">
+
+    <div id="topbar-placeholder"></div>
+
+    <div class="page-content">
+
+      <!-- KPI Cards -->
+      <section class="kpi-row">
+
+        <div class="kpi-card kpi-blue">
+          <div class="kpi-info">
+            <p class="kpi-label">TOTAL TASKS</p>
+            <h3 class="kpi-value" id="kpiTotal">48</h3>
+            <span class="kpi-sub">All Assigned Tasks</span>
+          </div>
+          <div class="kpi-icon-wrap">
+            <i class="fa-solid fa-list-check"></i>
+          </div>
+        </div>
+
+        <div class="kpi-card kpi-green">
+          <div class="kpi-info">
+            <p class="kpi-label">COMPLETED</p>
+            <h3 class="kpi-value" id="kpiCompleted">28</h3>
+            <span class="kpi-sub" id="kpiCompletedPct">58.33% Completed</span>
+          </div>
+          <div class="kpi-icon-wrap">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+        </div>
+
+        <div class="kpi-card kpi-yellow">
+          <div class="kpi-info">
+            <p class="kpi-label">IN PROGRESS</p>
+            <h3 class="kpi-value" id="kpiInProgress">12</h3>
+            <span class="kpi-sub" id="kpiInProgressPct">25.00% In Progress</span>
+          </div>
+          <div class="kpi-icon-wrap">
+            <i class="fa-solid fa-spinner"></i>
+          </div>
+        </div>
+
+        <div class="kpi-card kpi-orange">
+          <div class="kpi-info">
+            <p class="kpi-label">PENDING</p>
+            <h3 class="kpi-value" id="kpiPending">8</h3>
+            <span class="kpi-sub" id="kpiPendingPct">16.67% Pending</span>
+          </div>
+          <div class="kpi-icon-wrap">
+            <i class="fa-regular fa-clock"></i>
+          </div>
+        </div>
+
+        <div class="kpi-card kpi-red">
+          <div class="kpi-info">
+            <p class="kpi-label">OVERDUE</p>
+            <h3 class="kpi-value" id="kpiOverdue">2</h3>
+            <span class="kpi-sub overdue-sub">Needs Attention</span>
+          </div>
+          <div class="kpi-icon-wrap">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Main Layout: Table + Right Panel -->
+      <div class="hk-layout">
+
+        <!-- Left: Tasks Table Card -->
+        <div class="card tasks-card">
+
+          <!-- Filters -->
+          <div class="filters-row">
+            <div class="search-box-hk">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="searchInput"
+                placeholder="Search by Room Number">
+            </div>
+            <select class="filter-select" id="statusFilter">
+              <option value="">All Status</option>
+              <option value="Completed">Completed</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Pending">Pending</option>
+              <option value="Overdue">Overdue</option>
+            </select>
+            <select class="filter-select" id="floorFilter">
+              <option value="">All Floors</option>
+              <option value="1st">1st</option>
+              <option value="2nd">2nd</option>
+              <option value="3rd">3rd</option>
+            </select>
+            <select class="filter-select" id="priorityFilter">
+              <option value="">All Priority</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+            <button class="btn-add-task" id="addTaskBtn">
+              <i class="fa-solid fa-plus"></i> Add Task
+            </button>
+          </div>
+
+          <!-- Tabs -->
+          <div class="hk-tabs-header">
+            <h2>Housekeeping Tasks</h2>
+            <div class="tabs-row">
+              <button class="tab-btn active" data-tab="all">All Tasks</button>
+              <button class="tab-btn" data-tab="my">My Tasks</button>
+              <button class="tab-btn" data-tab="today">Today's Tasks</button>
+              <button class="tab-btn" data-tab="overdue">Overdue</button>
+            </div>
+          </div>
+
+          <!-- Table -->
+          <div class="table-wrap">
+            <table class="hk-table">
+              <thead>
+                <tr>
+                  <th>Task ID</th>
+                  <th>Room No.</th>
+                  <th>Room Type</th>
+                  <th>Floor</th>
+                  <th>Task Type</th>
+                  <th>Assigned To</th>
+                  <th>Status</th>
+                  <th>Priority</th>
+                  <th>Due Time</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="tasksBody">
+                <!-- injected by JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination -->
+          <div class="pagination-row">
+            <span class="results-text" id="resultsText">
+              Showing 1 to 7 reservations
+            </span>
+            <div class="pagination">
+              <button class="page-btn" id="prevPage">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <button class="page-btn active">1</button>
+              <button class="page-btn" id="nextPage">
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="quick-actions-bar">
+            <h4>Quick Actions</h4>
+            <div class="qa-row">
+              <button class="qa-btn" id="qaAssign">
+                <div class="qa-icon qa-blue">
+                  <i class="fa-solid fa-user-plus"></i>
+                </div>
+                <span>Assign Task</span>
+              </button>
+              <button class="qa-btn" id="qaMarkClean">
+                <div class="qa-icon qa-green">
+                  <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <span>Mark Room Clean</span>
+              </button>
+              <button class="qa-btn" id="qaCreateReq">
+                <div class="qa-icon qa-purple">
+                  <i class="fa-solid fa-calendar-plus"></i>
+                </div>
+                <span>Create Request</span>
+              </button>
+              <button class="qa-btn" id="qaSchedule">
+                <div class="qa-icon qa-yellow">
+                  <i class="fa-solid fa-calendar-check"></i>
+                </div>
+                <span>Schedule Cleaning</span>
+              </button>
+              <button class="qa-btn" id="qaMaintenance">
+                <div class="qa-icon qa-red">
+                  <i class="fa-solid fa-wrench"></i>
+                </div>
+                <span>Maintenance Request</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Housekeeping Supplies -->
+          <div class="supplies-card">
+            <h4 class="right-card-title">Housekeeping Supplies</h4>
+            <div class="supplies-row" id="suppliesList">
+              <!-- injected by JS -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Panel -->
+        <div class="right-panel">
+
+          <!-- Room Status Overview -->
+          <div class="card right-card">
+            <h4 class="right-card-title">Room Status Overview</h4>
+            <div class="donut-section">
+              <div class="donut-wrap">
+                <canvas id="roomStatusChart"></canvas>
+                <div class="donut-center">
+                  <span class="donut-num">80</span>
+                  <span class="donut-lbl">Total Rooms</span>
+                </div>
+              </div>
+              <div class="donut-legend">
+                <div class="donut-legend-item">
+                  <div class="dl-dot" style="background:#22c55e;"></div>
+                  <span class="dl-label">Clean</span>
+                  <span class="dl-value">45</span>
+                </div>
+                <div class="donut-legend-item">
+                  <div class="dl-dot" style="background:#f59e0b;"></div>
+                  <span class="dl-label">Dirty</span>
+                  <span class="dl-value">18</span>
+                </div>
+                <div class="donut-legend-item">
+                  <div class="dl-dot" style="background:#3b82f6;"></div>
+                  <span class="dl-label">In Progress</span>
+                  <span class="dl-value">12</span>
+                </div>
+                <div class="donut-legend-item">
+                  <div class="dl-dot" style="background:#ef4444;"></div>
+                  <span class="dl-label">Out of Service</span>
+                  <span class="dl-value">5</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Housekeeping Staff -->
+          <div class="card right-card">
+            <h4 class="right-card-title">Housekeeping Staff</h4>
+            <div class="staff-list" id="staffList">
+              <!-- injected by JS -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+  </div>
+</div>
+
+<!-- Add / Edit Task Modal -->
+<div class="modal-overlay" id="taskModal">
+  <div class="modal-box">
+
+    <div class="modal-header">
+      <h3 id="modalTitle">Add New Task</h3>
+      <button class="modal-close" id="closeModalBtn">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <form id="taskForm" class="modal-form">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="taskId">Task ID</label>
+          <input type="text" id="taskId" readonly>
+        </div>
+        <div class="form-group">
+          <label for="taskRoom">Room No. *</label>
+          <input type="text" id="taskRoom"
+            placeholder="e.g. 101" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="taskRoomType">Room Type *</label>
+          <select id="taskRoomType" required>
+            <option value="">Select type</option>
+            <option value="Single Room">Single Room</option>
+            <option value="Double Room">Double Room</option>
+            <option value="Deluxe Room">Deluxe Room</option>
+            <option value="Suite Room">Suite Room</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="taskFloor">Floor *</label>
+          <select id="taskFloor" required>
+            <option value="">Select floor</option>
+            <option value="1st">1st</option>
+            <option value="2nd">2nd</option>
+            <option value="3rd">3rd</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="taskType">Task Type *</label>
+          <select id="taskType" required>
+            <option value="">Select task</option>
+            <option value="Room Cleaning">Room Cleaning</option>
+            <option value="Deep Cleaning">Deep Cleaning</option>
+            <option value="Inspection">Inspection</option>
+            <option value="Linen Change">Linen Change</option>
+            <option value="Maintenance">Maintenance</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="taskAssigned">Assigned To *</label>
+          <select id="taskAssigned" required>
+            <option value="">Select staff</option>
+            <option value="Nimal Perera">Nimal Perera</option>
+            <option value="Kamal Silva">Kamal Silva</option>
+            <option value="Amal Gamage">Amal Gamage</option>
+            <option value="Susil Kumara">Susil Kumara</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="taskStatus">Status *</label>
+          <select id="taskStatus" required>
+            <option value="">Select status</option>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+            <option value="Overdue">Overdue</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="taskPriority">Priority *</label>
+          <select id="taskPriority" required>
+            <option value="">Select priority</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="taskDueTime">Due Time *</label>
+        <input type="datetime-local" id="taskDueTime" required>
+      </div>
+
+      <div class="form-group">
+        <label for="taskNotes">Notes (optional)</label>
+        <textarea id="taskNotes" rows="2"
+          placeholder="Any additional notes..."></textarea>
+      </div>
+
+      <input type="hidden" id="editTaskIndex" value="">
+
+      <div class="modal-actions">
+        <button type="button" class="btn-outline"
+          id="cancelModalBtn">Cancel</button>
+        <button type="submit" class="btn-primary">
+          <i class="fa-solid fa-check"></i> Save Task
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<!-- View Task Modal -->
+<div class="modal-overlay" id="viewModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>Task Details</h3>
+      <button class="modal-close" id="closeViewBtn">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="view-body" id="viewBody"></div>
+    <div class="modal-footer-actions">
+      <button class="btn-outline" id="closeViewBtn2">Close</button>
+      <button class="btn-primary" id="editFromViewBtn">
+        <i class="fa-solid fa-pen"></i> Edit Task
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="js/components.js"></script>
+<script src="js/housekeeping.js"></script>
+</body>
+</html>
