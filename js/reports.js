@@ -37,6 +37,120 @@ const reportList = [
   }
 ];
 
+function slugifyReportName(name) {
+  return name.trim().replace(/\s+/g, '-').toLowerCase();
+}
+
+function escapeXml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function buildPdfContent(rep) {
+  const escapePdfText = (value) => String(value)
+    .replace(/\\/g, '\\\\')
+    .replace(/\(/g, '\\(')
+    .replace(/\)/g, '\\)');
+
+  const lines = [
+    rep.name,
+    `Description: ${rep.desc}`,
+    `Date Range: ${rep.dateRange}`,
+    `Generated On: ${rep.generatedOn}`,
+    `Format: ${rep.format}`
+  ];
+
+  let content = 'BT\n/F1 18 Tf\n50 740 Td\n';
+  lines.forEach((line, index) => {
+    if (index === 0) {
+      content += `(${escapePdfText(line)}) Tj\n`;
+      content += '/F1 12 Tf\n0 -34 Td\n';
+    } else {
+      content += `(${escapePdfText(line)}) Tj\n0 -22 Td\n`;
+    }
+  });
+  content += 'ET';
+
+  const objects = [
+    '1 0 obj << /Type /Catalog /Pages 2 0 R >> endobj\n',
+    '2 0 obj << /Type /Pages /Kids [3 0 R] /Count 1 >> endobj\n',
+    '3 0 obj << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >> endobj\n',
+    '4 0 obj << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> endobj\n',
+    `5 0 obj << /Length ${content.length} >> stream\n${content}\nendstream endobj\n`
+  ];
+
+  const header = '%PDF-1.4\n';
+  let pdf = header;
+  const offsets = ['0000000000 65535 f \n'];
+
+  objects.forEach((object) => {
+    offsets.push(`${String(pdf.length).padStart(10, '0')} 00000 n \n`);
+    pdf += object;
+  });
+
+  const xrefStart = pdf.length;
+  pdf += `xref\n0 ${objects.length + 1}\n`;
+  pdf += offsets.join('');
+  pdf += `trailer << /Size ${objects.length + 1} /Root 1 0 R >>\n`;
+  pdf += `startxref\n${xrefStart}\n%%EOF`;
+
+  return pdf;
+}
+
+function buildExcelMarkup(rep) {
+  return `<!DOCTYPE html>
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+      xmlns:x="urn:schemas-microsoft-com:office:excel"
+      xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+  <table border="1">
+    <tr><th>Report Name</th><td>${escapeXml(rep.name)}</td></tr>
+    <tr><th>Description</th><td>${escapeXml(rep.desc)}</td></tr>
+    <tr><th>Date Range</th><td>${escapeXml(rep.dateRange)}</td></tr>
+    <tr><th>Generated On</th><td>${escapeXml(rep.generatedOn)}</td></tr>
+    <tr><th>Format</th><td>${escapeXml(rep.format)}</td></tr>
+  </table>
+</body>
+</html>`;
+}
+
+function downloadReportFile(rep) {
+  const format = String(rep.format || '').trim().toLowerCase();
+  const baseName = slugifyReportName(rep.name);
+
+  let blob;
+  let fileName;
+
+  if (format === 'pdf') {
+    blob = new Blob([buildPdfContent(rep)], { type: 'application/pdf' });
+    fileName = `${baseName}.pdf`;
+  } else if (format === 'excel') {
+    blob = new Blob([buildExcelMarkup(rep)], { type: 'application/vnd.ms-excel' });
+    fileName = `${baseName}.xls`;
+  } else {
+    const csv = [
+      'Report Name,Description,Date Range,Generated On,Format',
+      `${rep.name},${rep.desc},${rep.dateRange},${rep.generatedOn},${rep.format}`
+    ].join('\n');
+    blob = new Blob([csv], { type: 'text/csv' });
+    fileName = `${baseName}.csv`;
+  }
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = fileName;
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
 /* ════════════════════════════
    RENDER REPORT LIST TABLE
 ════════════════════════════ */
@@ -84,16 +198,7 @@ function renderReportList() {
   document.querySelectorAll('.download-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const rep = reportList[btn.dataset.index];
-      // Simulate CSV download
-      const csv = `Report Name,Description,Date Range,Format\n` +
-                  `${rep.name},${rep.desc},${rep.dateRange},${rep.format}`;
-      const blob = new Blob([csv], { type: 'text/csv' });
-      const url  = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = rep.name.replace(/\s+/g, '-').toLowerCase() + '.csv';
-      link.click();
-      URL.revokeObjectURL(url);
+      downloadReportFile(rep);
     });
   });
 

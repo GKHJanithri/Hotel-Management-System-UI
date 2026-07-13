@@ -10,7 +10,7 @@ This project focuses on building a modern, responsive, and user-friendly Hotel M
 
 The project follows a reusable component architecture by separating the **Sidebar**, **Topbar**, and **Footer** into shared components for better maintainability, scalability, and code reusability.
 
-The system currently includes **Dashboard**, **Reservations**, **Room Management**, **Room Map**, **Housekeeping**, **Point of Sale (POS)**, **Billing & Invoicing**, and **Staff Management** modules.
+The system currently includes **Dashboard**, **Reservations**, **Room Management**, **Room Map**, **Housekeeping**, **Point of Sale (POS)**, **Billing & Invoicing**, **Staff Management**, and **Reports & Analytics** modules.
 
 ---
 
@@ -26,6 +26,7 @@ The system currently includes **Dashboard**, **Reservations**, **Room Management
 - ✅ Point of Sale (POS)
 - ✅ Billing & Invoicing
 - ✅ Staff Management
+- ✅ Reports & Analytics
 
 ---
 
@@ -148,6 +149,21 @@ The system currently includes **Dashboard**, **Reservations**, **Room Management
 
 ---
 
+## Reports & Analytics Features
+
+- Revenue Reports
+- Reservation Reports
+- Occupancy Reports
+- Housekeeping Reports
+- Staff Performance Reports
+- Booking Trends
+- Search & Filter Reports
+- Export Reports
+- Charts & Analytics Dashboard
+- Summary Statistics Cards
+
+---
+
 # Technologies Used
 
 - Figma (UI/UX Design)
@@ -171,6 +187,7 @@ The system currently includes **Dashboard**, **Reservations**, **Room Management
 - Point of Sale (POS)
 - Billing & Invoicing
 - Staff Management
+- Reports & Analytics
 - Occupancy Monitoring
 - Revenue Overview
 
@@ -196,9 +213,23 @@ The system currently includes **Dashboard**, **Reservations**, **Room Management
 hotel-management-system-ui/
 │
 ├── components/
+│   ├── footer.html
+│   ├── sidebar.html
 │   └── topbar.html
 │
 ├── image/
+│   ├── cake.jpg
+│   ├── coc.jpg
+│   ├── coffee.jpg
+│   ├── french_frice.jpg
+│   ├── fruit_juice.jpg
+│   ├── hop.jpg
+│   ├── pasta.jpg
+│   ├── r_vine.jpg
+│   ├── rice.jpg
+│   ├── sandwich.jpg
+│   ├── towel.jpg
+│   └── w_vine.jpg
 │
 ├── js/
 │   ├── billing.js
@@ -206,6 +237,7 @@ hotel-management-system-ui/
 │   ├── dashboard.js
 │   ├── housekeeping.js
 │   ├── POS.js
+│   ├── reports.js
 │   ├── reservations.js
 │   ├── room-management.js
 │   ├── roomMap.js
@@ -217,6 +249,7 @@ hotel-management-system-ui/
 │   ├── dashboard.css
 │   ├── housekeeping.css
 │   ├── POS.css
+│   ├── reports.css
 │   ├── reservations.css
 │   ├── room-management.css
 │   ├── roomMap.css
@@ -226,6 +259,7 @@ hotel-management-system-ui/
 ├── dashboard.html
 ├── housekeeping.html
 ├── POS.html
+├── reports.html
 ├── reservations.html
 ├── room-management.html
 ├── roomMap.html
@@ -275,6 +309,8 @@ Website: https://egotechworld.com
 - ✅ Billing & Invoicing Frontend Development Completed
 - ✅ Staff Management UI Designed in Figma
 - ✅ Staff Management Frontend Development Completed
+- ✅ Reports & Analytics UI Designed in Figma
+- ✅ Reports & Analytics Frontend Development Completed
 - ✅ Reusable Component Architecture
 - ✅ Shared CSS Architecture
 - ✅ Shared JavaScript Component Loader
@@ -284,7 +320,6 @@ Website: https://egotechworld.com
 
 # Upcoming Modules
 
-- Reports & Analytics
 - Settings
 - Guest Management
 - Authentication
