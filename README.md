@@ -10,7 +10,7 @@ This project focuses on building a modern, responsive, and user-friendly Hotel M
 
 The project follows a reusable component architecture by separating the **Sidebar**, **Topbar**, and **Footer** into shared components for better maintainability, scalability, and code reusability.
 
-The system currently includes **Dashboard**, **Reservations**, **Room Management**, **Room Map**, **Housekeeping**, and **Point of Sale (POS)** modules.
+The system currently includes **Dashboard**, **Reservations**, **Room Management**, **Room Map**, **Housekeeping**, **Point of Sale (POS)**, **Billing & Invoicing**, and **Staff Management** modules.
 
 ---
 
@@ -24,6 +24,8 @@ The system currently includes **Dashboard**, **Reservations**, **Room Management
 - ✅ Room Map
 - ✅ Housekeeping
 - ✅ Point of Sale (POS)
+- ✅ Billing & Invoicing
+- ✅ Staff Management
 
 ---
 
@@ -81,6 +83,7 @@ The system currently includes **Dashboard**, **Reservations**, **Room Management
 - Occupied & Available Status
 - Room Type Identification
 - Room Information Panel
+- Bulk Room Update
 - Quick Room Actions
 
 ---
@@ -90,11 +93,11 @@ The system currently includes **Dashboard**, **Reservations**, **Room Management
 - Housekeeping Status Overview
 - Room Cleaning Schedule
 - Staff Assignment
-- Room Status Tracking
+- Cleaning Progress Tracker
+- Room Status Monitoring
 - Maintenance Alerts
-- Search and Filter Rooms
-- Cleaning Progress
-- Task Summary
+- Search & Filter
+- Task Summary Cards
 
 ---
 
@@ -106,10 +109,42 @@ The system currently includes **Dashboard**, **Reservations**, **Room Management
 - Order Cart
 - Quantity Management
 - Billing Summary
-- Tax & Discount Calculation
+- Tax Calculation
+- Discount Support
 - Payment Methods
 - Order Confirmation
 - Invoice Preview
+
+---
+
+## Billing & Invoicing Features
+
+- Invoice Dashboard
+- Invoice Summary Cards
+- Invoice Search
+- Billing Status
+- Payment Status
+- Invoice Table
+- Customer Billing Details
+- Payment Methods
+- Invoice Preview
+- Print Invoice
+- Download Invoice
+
+---
+
+## Staff Management Features
+
+- Staff Overview Cards
+- Staff Directory
+- Search Employees
+- Filter by Department
+- Employee Information Table
+- Attendance Status
+- Contact Information
+- View Staff Details
+- Edit Staff Information
+- Staff Status Management
 
 ---
 
@@ -131,10 +166,11 @@ The system currently includes **Dashboard**, **Reservations**, **Room Management
 - Dashboard Analytics
 - Reservation Management
 - Room Management
-- Room Availability Monitoring
 - Room Map Visualization
 - Housekeeping Management
 - Point of Sale (POS)
+- Billing & Invoicing
+- Staff Management
 - Occupancy Monitoring
 - Revenue Overview
 
@@ -147,6 +183,7 @@ The system currently includes **Dashboard**, **Reservations**, **Room Management
 - Reusable Topbar
 - Reusable Footer
 - Shared CSS Architecture
+- Shared JavaScript Components
 - Responsive Navigation Layout
 - Bootstrap Components
 - Consistent Color Palette
@@ -159,48 +196,40 @@ The system currently includes **Dashboard**, **Reservations**, **Room Management
 hotel-management-system-ui/
 │
 ├── components/
-│   ├── footer.html
-│   ├── sidebar.html
 │   └── topbar.html
 │
 ├── image/
-│   ├── cake.jpg
-│   ├── coc.jpg
-│   ├── coffee.jpg
-│   ├── french_frice.jpg
-│   ├── fruit_juice.jpg
-│   ├── hop.jpg
-│   ├── pasta.jpg
-│   ├── r_vine.jpg
-│   ├── rice.jpg
-│   ├── sandwich.jpg
-│   ├── towel.jpg
-│   └── w_vine.jpg
 │
 ├── js/
+│   ├── billing.js
 │   ├── components.js
 │   ├── dashboard.js
 │   ├── housekeeping.js
 │   ├── POS.js
 │   ├── reservations.js
 │   ├── room-management.js
-│   └── roomMap.js
+│   ├── roomMap.js
+│   └── staff_manage.js
 │
 ├── styles/
+│   ├── billing.css
 │   ├── components.css
 │   ├── dashboard.css
 │   ├── housekeeping.css
 │   ├── POS.css
 │   ├── reservations.css
 │   ├── room-management.css
-│   └── roomMap.css
+│   ├── roomMap.css
+│   └── staff_manage.css
 │
+├── billing.html
 ├── dashboard.html
 ├── housekeeping.html
 ├── POS.html
 ├── reservations.html
 ├── room-management.html
 ├── roomMap.html
+├── staff_manage.html
 └── README.md
 ```
 
@@ -242,9 +271,11 @@ Website: https://egotechworld.com
 - ✅ Housekeeping Frontend Development Completed
 - ✅ Point of Sale (POS) UI Designed in Figma
 - ✅ Point of Sale (POS) Frontend Development Completed
-- ✅ Reusable Sidebar Component
-- ✅ Reusable Topbar Component
-- ✅ Reusable Footer Component
+- ✅ Billing & Invoicing UI Designed in Figma
+- ✅ Billing & Invoicing Frontend Development Completed
+- ✅ Staff Management UI Designed in Figma
+- ✅ Staff Management Frontend Development Completed
+- ✅ Reusable Component Architecture
 - ✅ Shared CSS Architecture
 - ✅ Shared JavaScript Component Loader
 - ✅ Responsive Layout Implemented
@@ -253,11 +284,9 @@ Website: https://egotechworld.com
 
 # Upcoming Modules
 
-- Billing & Invoicing
-- Guest Management
-- Staff Management
 - Reports & Analytics
 - Settings
+- Guest Management
 - Authentication
 - Backend Integration
 - Database Connectivity
