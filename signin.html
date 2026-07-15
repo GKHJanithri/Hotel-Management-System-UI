@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Sys - Sign In</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles/signin.css">
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <!-- LEFT PANEL -->
+  <div class="left-panel">
+
+    <!-- Brand -->
+    <div class="brand">
+      <div class="brand-icon">
+        <i class="fa-solid fa-building"></i>
+      </div>
+      <div class="brand-text">
+        <span class="brand-name">Hotel Sys</span>
+        <span class="brand-sub">Hotel Management System</span>
+      </div>
+    </div>
+
+    <!-- Headline -->
+    <h1 class="headline">
+      Deliver exceptional guest experiences with HotelSys.
+    </h1>
+
+    <!-- Features -->
+    <div class="features">
+      <div class="feature-item">
+        <div class="feature-icon">
+          <i class="fa-solid fa-user-shield"></i>
+        </div>
+        <div class="feature-text">
+          <p class="feature-title">Fast &amp; Secure Login</p>
+          <p class="feature-desc">Securely access your hotel dashboard.</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">
+          <i class="fa-solid fa-building"></i>
+        </div>
+        <div class="feature-text">
+          <p class="feature-title">Live Hotel Operations</p>
+          <p class="feature-desc">Manage rooms, reservations, and guests with ease.</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon">
+          <i class="fa-solid fa-chart-line"></i>
+        </div>
+        <div class="feature-text">
+          <p class="feature-title">Smart Business Insights</p>
+          <p class="feature-desc">Monitor occupancy and hotel performance in real time.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hotel image overlay -->
+    <div class="hotel-img-wrap">
+      <img src="image/hotel.png" alt="Hotel Building"
+        class="hotel-img"
+        onerror="this.style.display='none'">
+    </div>
+
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+
+    <div class="form-card">
+
+      <h2 class="form-title">Welcome Back!</h2>
+      <p class="form-sub">
+        Don't have an account?
+        <a href="signup.html" class="link-blue">Sign up</a>
+      </p>
+
+      <form id="signinForm" novalidate autocomplete="off">
+
+        <!-- Email -->
+        <div class="form-group" id="grp-email">
+          <label for="email">Work Email</label>
+          <div class="input-wrap">
+            <i class="fa-regular fa-envelope input-icon"></i>
+            <input type="email" id="email"
+              placeholder="you@gmail.com">
+          </div>
+          <p class="err-msg" id="err-email">
+            Please enter a valid email address.
+          </p>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group" id="grp-password">
+          <label for="password">Password</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-lock input-icon"></i>
+            <input type="password" id="password"
+              placeholder="Enter your password">
+            <button type="button" class="toggle-pass"
+              id="togglePass">
+              <i class="fa-regular fa-eye" id="passIcon"></i>
+            </button>
+          </div>
+          <p class="err-msg" id="err-password">
+            Please enter your password.
+          </p>
+        </div>
+
+        <!-- Remember me + Forgot -->
+        <div class="options-row">
+          <label class="remember-wrap">
+            <input type="checkbox" id="rememberMe">
+            <span>Remember me</span>
+          </label>
+          <a href="#" class="link-blue forgot-link">
+            Forgot Password?
+          </a>
+        </div>
+
+        <!-- Sign In Button -->
+        <button type="submit" class="btn-signin" id="signinBtn">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          Sign In
+        </button>
+
+      </form>
+
+      <!-- Divider -->
+      <div class="divider">
+        <span>OR</span>
+      </div>
+
+      <!-- Google Button -->
+      <button class="btn-google" type="button">
+        <svg width="20" height="20" viewBox="0 0 48 48">
+          <path fill="#EA4335"
+            d="M24 9.5c3.14 0 5.96 1.08 8.18 2.85l6.1-6.1C34.56 3.06 29.57 1 24 1
+               14.82 1 6.96 6.33 3.19 14.09l7.1 5.52C12.07 13.34 17.58 9.5 24 9.5z"/>
+          <path fill="#4285F4"
+            d="M46.14 24.5c0-1.6-.14-3.13-.4-4.61H24v8.73h12.47
+               c-.54 2.9-2.17 5.36-4.63 7.02l7.1 5.52
+               C43.18 37.13 46.14 31.3 46.14 24.5z"/>
+          <path fill="#FBBC05"
+            d="M10.29 28.39A14.46 14.46 0 0 1 9.5 24c0-1.52.26-3 .79-4.39
+               l-7.1-5.52A23.94 23.94 0 0 0 0 24c0 3.87.93 7.53 2.57 10.78
+               l7.72-6.39z"/>
+          <path fill="#34A853"
+            d="M24 47c5.57 0 10.25-1.84 13.67-5l-7.1-5.52
+               c-1.84 1.23-4.18 1.96-6.57 1.96
+               -6.42 0-11.93-3.84-13.71-9.09l-7.72 6.39
+               C6.96 41.67 14.82 47 24 47z"/>
+        </svg>
+        Continue with Google
+      </button>
+
+      <!-- Security Note -->
+      <p class="security-note">
+        <i class="fa-solid fa-shield-halved"></i>
+        Your data is safe with us. We never share your information.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-content">
+
+    <div class="footer-brand-col">
+      <div class="footer-brand-name">EgoTECH World</div>
+      <p class="footer-brand-desc">
+        Developing ready made and custom solutions for modern challenges.
+      </p>
+    </div>
+
+    <div class="footer-nav-col">
+      <h5 class="footer-col-title">Navigation</h5>
+      <div class="footer-links-grid">
+        <div class="footer-links-col">
+          <a href="#">Home</a>
+          <a href="#">Job</a>
+          <a href="#">Services</a>
+        </div>
+        <div class="footer-links-col">
+          <a href="#">Projects</a>
+          <a href="#">Contact</a>
+          <a href="#">About</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-divider-v"></div>
+
+    <div class="footer-nav-col">
+      <h5 class="footer-col-title">Resources</h5>
+      <div class="footer-links-grid">
+        <div class="footer-links-col">
+          <a href="#">Documentation</a>
+          <a href="#">Pricing</a>
+          <a href="#">Support</a>
+        </div>
+        <div class="footer-links-col">
+          <a href="#">Privacy &amp; Policy</a>
+          <a href="#">Terms &amp; Conditions</a>
+          <a href="#">Contact Us</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-divider-v"></div>
+
+    <div class="footer-social-col">
+      <h5 class="footer-col-title">Stay Connected</h5>
+      <div class="footer-social-icons">
+        <a href="#" class="social-icon facebook" aria-label="Facebook">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a href="#" class="social-icon linkedin" aria-label="LinkedIn">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+      </div>
+      <p class="footer-follow">Follow Us</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    &copy; 2026 egotechworld.com &nbsp;&ndash;&nbsp;
+    EGOTECHWORLD PVT LTD. All Rights Reserved.
+  </div>
+</footer>
+
+<script src="js/signin.js"></script>
+</body>
+</html>
