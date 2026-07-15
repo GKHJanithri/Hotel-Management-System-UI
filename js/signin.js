@@ -29,6 +29,13 @@ function validateEmail(v) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 }
 
+function isValidCredentials(email, password) {
+  const allowedEmail = 'himayajanithri@gmail.com';
+  const allowedPassword = '123456';
+
+  return email.toLowerCase() === allowedEmail && password === allowedPassword;
+}
+
 // ── Live clear on input ──
 document.getElementById('email').addEventListener('input', () => {
   clearError('grp-email');
@@ -66,6 +73,14 @@ document.getElementById('signinForm').addEventListener('submit', (e) => {
   }
 
   if (!valid) return;
+
+  if (!isValidCredentials(email, password)) {
+    setError('grp-password', 'Invalid email or password.');
+    return;
+  }
+
+  clearError('grp-email');
+  clearError('grp-password');
 
   // ── Success: redirect to dashboard ──
   const btn = document.getElementById('signinBtn');

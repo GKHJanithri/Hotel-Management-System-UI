@@ -60,6 +60,13 @@ const FALLBACK_COMPONENTS = {
     </button>
   </div>
 
+  <div class="sidebar-bottom">
+    <a href="signin.html" class="logout-link">
+      <i class="fa-solid fa-right-from-bracket"></i>
+      <span>Sign Out</span>
+    </a>
+  </div>
+
 </aside>`,
   topbar: `<header class="topbar">
   <div class="topbar-left">

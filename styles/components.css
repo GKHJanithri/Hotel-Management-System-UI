@@ -59,6 +59,11 @@ body {
   z-index: 100;
 }
 
+.sidebar-bottom {
+  margin-top: auto;
+  padding-top: 16px;
+}
+
 /* Logo */
 .sidebar-logo {
   display: flex;
@@ -146,6 +151,33 @@ body {
   padding: 16px;
   margin-top: 16px;
   border: 1px solid rgba(255,255,255,0.08);
+}
+
+.logout-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  color: rgba(255,255,255,0.72);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background .2s, color .2s, transform .2s;
+}
+
+.logout-link i {
+  width: 18px;
+  text-align: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.logout-link:hover {
+  background: rgba(239,68,68,0.14);
+  color: #fff;
+  transform: translateX(2px);
 }
 
 .trial-top {
