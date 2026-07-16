@@ -25,20 +25,30 @@ function clearError(groupId) {
   document.getElementById(groupId).classList.remove('has-error');
 }
 
-function validateEmail(v) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+function getStoredUser() {
+  try {
+    return JSON.parse(localStorage.getItem('hotelSysUser'));
+  } catch (error) {
+    return null;
+  }
 }
 
-function isValidCredentials(email, password) {
-  const allowedEmail = 'himayajanithri@gmail.com';
-  const allowedPassword = '123456';
+function isValidCredentials(username, password) {
+  const storedUser = getStoredUser();
+  if (!storedUser) {
+    return false;
+  }
 
-  return email.toLowerCase() === allowedEmail && password === allowedPassword;
+  const normalizedUsername = username.toLowerCase();
+  const storedUsername = (storedUser.username || storedUser.name || '').toLowerCase();
+  const storedEmail = (storedUser.email || '').toLowerCase();
+
+  return (normalizedUsername === storedUsername || normalizedUsername === storedEmail) && password === storedUser.password;
 }
 
 // ── Live clear on input ──
-document.getElementById('email').addEventListener('input', () => {
-  clearError('grp-email');
+document.getElementById('username').addEventListener('input', () => {
+  clearError('grp-username');
 });
 
 document.getElementById('password').addEventListener('input', () => {
@@ -46,19 +56,19 @@ document.getElementById('password').addEventListener('input', () => {
 });
 
 // ── Form submit ──
-document.getElementById('signForm').addEventListener('submit', (e) => {
+document.getElementById('signinForm').addEventListener('submit', (e) => {
   e.preventDefault();
 
-  const email    = document.getElementById('email').value.trim();
+  const username = document.getElementById('username').value.trim();
   const password = document.getElementById('password').value;
   let valid = true;
 
-  // Validate email
-  if (!validateEmail(email)) {
-    setError('grp-email', 'Please enter a valid email address.');
+  // Validate username
+  if (username.length === 0) {
+    setError('grp-username', 'Please enter your username.');
     valid = false;
   } else {
-    clearError('grp-email');
+    clearError('grp-username');
   }
 
   // Validate password
@@ -74,12 +84,17 @@ document.getElementById('signForm').addEventListener('submit', (e) => {
 
   if (!valid) return;
 
-  if (!isValidCredentials(email, password)) {
-    setError('grp-password', 'Invalid email or password.');
+  if (!getStoredUser()) {
+    setError('grp-username', 'No account found. Please sign up first.');
     return;
   }
 
-  clearError('grp-email');
+  if (!isValidCredentials(username, password)) {
+    setError('grp-password', 'Invalid username or password.');
+    return;
+  }
+
+  clearError('grp-username');
   clearError('grp-password');
 
   // ── Success: redirect to dashboard ──

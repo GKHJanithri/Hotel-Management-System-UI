@@ -25,6 +25,7 @@ function setupPasswordToggles() {
 function setupSignupForm() {
   const form = document.getElementById("signupForm");
   const errorEl = document.getElementById("signupError");
+  const accountStorageKey = "hotelSysUser";
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -63,17 +64,17 @@ function setupSignupForm() {
       return;
     }
 
-    // All checks passed — this is where you'd call your real signup API.
-    // Example:
-    // fetch("/api/signup", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ name, email, phone, password })
-    // });
+    const account = {
+      username: name,
+      name,
+      email,
+      phone,
+      password,
+    };
 
-    console.log("Signup submitted:", { name, email, phone });
-    //alert(`Account created for ${name}! Redirect to the dashboard from here.`);
-     window.location.href = "signin.html";
+    localStorage.setItem(accountStorageKey, JSON.stringify(account));
+
+    window.location.href = "signin.html";
   });
 }
 
