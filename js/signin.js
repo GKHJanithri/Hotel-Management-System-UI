@@ -46,7 +46,7 @@ document.getElementById('password').addEventListener('input', () => {
 });
 
 // ── Form submit ──
-document.getElementById('signinForm').addEventListener('submit', (e) => {
+document.getElementById('signForm').addEventListener('submit', (e) => {
   e.preventDefault();
 
   const email    = document.getElementById('email').value.trim();

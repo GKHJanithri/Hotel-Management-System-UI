@@ -72,8 +72,8 @@ function setupSignupForm() {
     // });
 
     console.log("Signup submitted:", { name, email, phone });
-    alert(`Account created for ${name}! Redirect to the dashboard from here.`);
-    // window.location.href = "dashboard.html";
+    //alert(`Account created for ${name}! Redirect to the dashboard from here.`);
+     window.location.href = "signin.html";
   });
 }
 
